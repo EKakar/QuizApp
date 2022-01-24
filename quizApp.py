@@ -74,22 +74,22 @@ class ui:
     def previewQuestion(self,index):
         self.clearLeftFrame()
         tk.Label(self.leftFrame,text=QuestionArray[index].questionText).place(x=100,y=50,width = 400, height = 300)
-        tk.Label(self.leftFrame,text="Doğru cevap:"+QuestionArray[index].optionTexts[0]).place(x=100,y=400,width=400,height=50)
+        tk.Label(self.leftFrame,text="True Answer:"+QuestionArray[index].optionTexts[0]).place(x=100,y=400,width=400,height=50)
         tk.Label(self.leftFrame,text=QuestionArray[index].optionTexts[1]).place(x=100,y=480,width=400,height=50)
         tk.Label(self.leftFrame,text=QuestionArray[index].optionTexts[2]).place(x=100,y=550,width=400,height=50)
         tk.Label(self.leftFrame,text=QuestionArray[index].optionTexts[3]).place(x=100,y=630,width=400,height=50)
         
-        btn = tk.Button(self.leftFrame,text="Soruyu sil",command = lambda:[self.removeQuestion(index),self.updateRightBuffer(),self.clearLeftFrame(),self.loginScreen()])
+        btn = tk.Button(self.leftFrame,text="Delete Question",command = lambda:[self.removeQuestion(index),self.updateRightBuffer(),self.clearLeftFrame(),self.loginScreen()])
         btn.place(x=170,y=700,width=100,height=50)
         
-        btn2 = tk.Button(self.leftFrame,text="Geri",command = lambda:[self.clearLeftFrame(),self.loginScreen()])
+        btn2 = tk.Button(self.leftFrame,text="Back",command = lambda:[self.clearLeftFrame(),self.loginScreen()])
         btn2.place(x=320,y=700,width=100,height=50)
         
     def loginScreen(self):
-        lecturerButton = tk.Button(self.leftFrame,text="Öğretmen Olarak Giriş Yap",command = self.questingAddScreen)
+        lecturerButton = tk.Button(self.leftFrame,text="Sign in as a Instructor",command = self.questingAddScreen)
         lecturerButton.place(x=200,y=300,width=200,height=50)
                 
-        studentButton = tk.Button(self.leftFrame,text="Öğrenci Olarak Giriş Yap",command=self.studentScreen)
+        studentButton = tk.Button(self.leftFrame,text="Sign in as a Student",command=self.studentScreen)
         studentButton.place(x=200,y=400,width=200,height=50)
 
 
@@ -112,22 +112,22 @@ class ui:
         self.optionD.place(x=100,y=630,width=400,height=50)
         
         
-        tk.Label(self.leftFrame,text="Soru metnini giriniz.",justify="center").place(x=0,y=20,width=600,height=25)
-        tk.Label(self.leftFrame,text="A şıkkını giriniz.",justify="center").place(x=0,y=377,width=600,height=25)
-        tk.Label(self.leftFrame,text="B şıkkını giriniz.",justify="center").place(x=0,y=457,width=600,height=25)
-        tk.Label(self.leftFrame,text="C şıkkını giriniz.",justify="center").place(x=0,y=527,width=600,height=25)
-        tk.Label(self.leftFrame,text="D şıkkını giriniz.",justify="center").place(x=0,y=607,width=600,height=25)
+        tk.Label(self.leftFrame,text="Enter a Question.",justify="center").place(x=0,y=20,width=600,height=25)
+        tk.Label(self.leftFrame,text="A",justify="center").place(x=0,y=377,width=600,height=25)
+        tk.Label(self.leftFrame,text="B",justify="center").place(x=0,y=457,width=600,height=25)
+        tk.Label(self.leftFrame,text="C",justify="center").place(x=0,y=527,width=600,height=25)
+        tk.Label(self.leftFrame,text="D",justify="center").place(x=0,y=607,width=600,height=25)
         
-        self.addButton = tk.Button(self.leftFrame,text="Soruyu ekle",command=self.addQ)
+        self.addButton = tk.Button(self.leftFrame,text="Add a Question",command=self.addQ)
         self.addButton.place(x=170,y=700,width=100,height=50)
         
-        self.backButton = tk.Button(self.leftFrame,text="Geri",command= lambda:[self.clearLeftFrame(),self.loginScreen()])
+        self.backButton = tk.Button(self.leftFrame,text="Back",command= lambda:[self.clearLeftFrame(),self.loginScreen()])
         self.backButton.place(x=320,y=700,width=100,height=50)
         
     def updateRightBuffer(self):
         self.clearRightFrame()
         for i in range(len(QuestionArray),0,-1):
-            self.QuestList.insert(0,"Soru "+str(i))
+            self.QuestList.insert(0,"Question "+str(i))
         
         if(self.quizStarted):
             for i in range(len(QuestionArray)):
@@ -160,8 +160,8 @@ class ui:
         
     def studentScreen(self):
         self.clearLeftFrame()
-        tk.Button(self.leftFrame,text="Quizi Başlat",command=self.startQuiz).place(x=200,y=300,width=200,height=50)
-        tk.Button(self.leftFrame,text="Geri",command=lambda:[self.clearLeftFrame(),self.loginScreen()]).place(x=200,y=400,width=200,height=50)
+        tk.Button(self.leftFrame,text="Start Quiz",command=self.startQuiz).place(x=200,y=300,width=200,height=50)
+        tk.Button(self.leftFrame,text="Back",command=lambda:[self.clearLeftFrame(),self.loginScreen()]).place(x=200,y=400,width=200,height=50)
         
     def startQuiz(self):
         self.clearLeftFrame()
@@ -194,19 +194,19 @@ class ui:
             btn.place(x=100,y=400+(cnt*80),width=400,height=50)
             cnt += 1
         
-        btn = tk.Button(self.leftFrame,text="Cevabı kaydet",command=lambda:self.saveAnswer(idx))
+        btn = tk.Button(self.leftFrame,text="Save Answer",command=lambda:self.saveAnswer(idx))
         btn.place(x=250,y=700,width=100,height=50)
         
-        btn2 = tk.Button(self.leftFrame,text="Sıradaki soru",command=lambda:self.answerQuestionScreen(idx+1))
+        btn2 = tk.Button(self.leftFrame,text="Next Question",command=lambda:self.answerQuestionScreen(idx+1))
         btn2.place(x=400,y=700,width=100,height=50)
         
-        btn3 = tk.Button(self.leftFrame,text="Sınavı bitir",command=lambda:self.finishExam())
+        btn3 = tk.Button(self.leftFrame,text="Finish Attemp",command=lambda:self.finishExam())
         btn3.place(x=100,y=700,width=100,height=50)
     
     def finishExam(self):
         self.clearRightFrame()
         for i in range(len(QuestionArray),0,-1):
-            self.QuestList.insert(0,"Soru "+str(i))
+            self.QuestList.insert(0,"Question "+str(i))
         
         correctCount = 0
         wrongCount = 0
@@ -223,11 +223,11 @@ class ui:
                 wrongCount += 1
         
         self.clearLeftFrame()
-        tk.Label(self.leftFrame,text="Doğru cevap sayısı:"+str(correctCount),justify="center").place(x=0,y=100,width=600,height=25)
-        tk.Label(self.leftFrame,text="Yanlış cevap sayısı:"+str(wrongCount),justify="center").place(x=0,y=200,width=600,height=25)
-        tk.Label(self.leftFrame,text="Boş soru sayısı:"+str(emptyCount),justify="center").place(x=0,y=300,width=600,height=25)
+        tk.Label(self.leftFrame,text="Number of true answer: "+str(correctCount),justify="center").place(x=0,y=100,width=600,height=25)
+        tk.Label(self.leftFrame,text="Number of wrong answer: "+str(wrongCount),justify="center").place(x=0,y=200,width=600,height=25)
+        tk.Label(self.leftFrame,text="Number of empty question: "+str(emptyCount),justify="center").place(x=0,y=300,width=600,height=25)
         
-        btn2 = tk.Button(self.leftFrame,text="Ana Ekrana Dön",command=lambda:self.resetQuiz())
+        btn2 = tk.Button(self.leftFrame,text="Back to Menu",command=lambda:self.resetQuiz())
         btn2.place(x=250,y=500,width=100,height=50)
     
     def resetQuiz(self):
